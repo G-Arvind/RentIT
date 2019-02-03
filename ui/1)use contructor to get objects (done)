@@ -1,0 +1,8 @@
+1)use php sessions
+
+2) show vehicle and shop ui.
+
+3) change dao to delgate and util to dao. (done)
+
+4)slim middleware 
+

@@ -5,13 +5,13 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 //use App\DAO\ShopDAO;
 //use App\Model\ShopModel;
-use App\Controller\ShopController;
+use App\Controller\VehicleController;
 
-$app->post('/addShop', function (Request $request, Response $response, array $args) {
+$app->post('/addVehicle', function (Request $request, Response $response, array $args) {
 
-    $shopController=new ShopController();
+    $vehileController=new VehicleController();
 
-    $responseArray=$shopController->addShopController($request);
+    $responseArray=$vehileController->addVehicleController($request);
 
     $response=$response->withJson($responseArray);
    

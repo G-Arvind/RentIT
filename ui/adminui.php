@@ -1,100 +1,141 @@
 <html>
 <head>
-<title>Admin Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="./static/scripts/jquery-3.3.1.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./static/scripts/adminDbJS.js"></script>
-<script type="text/javascript">
-	function getval(){
-    // if($_SESSION["uid"]==null){
-    //    window.location="home.php"; 
-    // }
-    // echo("Session value : ". $uid);
-	// 	 if(sessionStorage.getItem('username')==null&&sessionStorage.getItem('password')==null){
- //             window.location="home.php"; 
- // }
- if (sessionStorage.getItem('username')==null) {window.location="home.php"; }
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="./static/scripts/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="notes.css" />
+    <script type="text/javascript" src="./static/scripts/adminDbJS.js"></script>
+    <script type="text/javascript">   
+    function getval(){
 
-}
-</script>
-<style>
-.vertical-menu {
-	margin-left: 0%;
-	background-color: grey;
-	font-family: arial;
-  width: 200px; /* Set a width if you like */
-  height: 900px;
-}
+  if (sessionStorage.getItem('username')==null) {window.location="home.php"; }
 
-.vertical-menu a {
-  background-color: grey; /* Grey background color */
-  color: black; /* Black text color */
-  display: block; /* Make the links appear below each other */
-  padding: 22px; /* Add some padding */
-  text-decoration: none; /* Remove underline from links */
+  hide();
 }
-
-.vertical-menu a:hover {
-  background-color: #ccc; /* Dark grey background on mouse-over */
+</script>  
+<style type="text/css">
+    body{
+        padding: 0;
+        margin: 0;
+        border: none;
+    height: 95vh;
+    width: 95vw;
+}
+.leftcontainer{ 
+   position: absolute;
+   width: 25%;
+   height: 100%;
+   background:#3c4554;
+}
+.maincontainer{
+   margin-left: 25%;
+   position: absolute;
+   width: 75%;
+   height: 100%;
+   background: #3d353a;
 }
 
-.vertical-menu a.active {
-  background-color: black; /* Add a green color to the "active/current" link */
-  color: white;
-}
-#addShopForm {
-  display: none;
-}
-#addShopForm:target {
-  position: absolute;
-  margin-left: 700px;
-  display: table;
-}
-#showShops {
-  display: none;
-}
-#showShops:target {
+#showShops{
   display: flex;
   flex-wrap: wrap;
   position: absolute;
   top:5%;
-  left: 12%;
-  background: grey;
+  left: 5%;
+  background: transparent;
   width: 80%;
   height: 90vh;
   align-content: flex-start;
 }
 .content{
   padding: 10px;
-  width: 20%;
-  height: 40%;
+  width: 30%;
+  height: 45%;
   border: 5px solid grey;
   background: white;
   box-sizing: border-box;
 }
+ul{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+li{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-bottom: 1px solid grey;
+    color: white;
+    padding: 15px 20px;
+}
+li:hover{
+    background:#3d353a;
+}
+#addShopForm{
+    display: none;
+}
+#addShopForm:target {
+  font-family: arial;
+  color: white;
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 30%;
+  display: table;
+}
+form button{
+    margin-top: 5%;
+    color: white;
+    height: 40px;
+    width: 50%;
+    background: red;
+    margin-left: 20%;
+    border: none;
+    border-radius: 20px;
+}
+
 #addVehicleForm {
+  font-family: arial;
+  color: white;
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 30%;
+
+}
+#addVehicle{
+    font-family: arial;
+     margin-left: 30%;
+    color: white;
+    margin-top: 5%;
+}
+.hide{
   display: none;
 }
-#addVehicleForm:target {
-  position: absolute;
-  margin-top: -200px; 
-  margin-left: 700px;
-  display: table;
+
+li > a{
+    margin-left: 5%;
+    color: white;
+    text-decoration: none;
 }
 </style>
 </head>
 
 <body onload="getval()">
 
-<div class="vertical-menu">
-  <a href="#" class="active">Home</a>
+    <div class="leftcontainer">    
+    <ul id="list"> 
+        <li><a href="#">Home</a></li>
+        <li><a href="#addShopForm" onclick="hide()">Add Shop</a></li>
+        <li><a href="#showShops" onclick="showShops()">Show shops</a></li>
+        <li><a href="#">Log out</a></li>
+    </ul>
+    </div>
 
-  <a href="#addShopForm">Add Shop</a>
-  <div id="addShopForm">
+    <div class="maincontainer">
 
-    <center>
+    <div id="addShopForm">
 
          <form id="addShop" onsubmit="event.preventDefault(); addShop()">
                     Shop Name:<br>
@@ -123,33 +164,18 @@
 
                     Shop Pincode:<br>
                     <input type="text" id="rpin" name="rpin"><br><br>
-
-
-
  
-                    <input type="submit" class="btn btn-danger"  value="Add Shop">
+                    <button type="submit">Add Shop</buton>
 
                     </form>
-
-                    </center>
   
 </div>
-
-
-  <a href="#showShops" onclick="showShops()">Show shops</a>
+  <div id="shopscontainer">
   <div id="showShops">
-    <!-- <center>
-      <h1>hello</h1>
-    </center>
-     -->
   </div>
-
-
-  <a href="#addVehicleForm">Add Vehicle</a>
+</div>
   
   <div id="addVehicleForm">
-
-    <center>
 
          <form id="addVehicle" onsubmit="event.preventDefault(); addVehicle()">
                     Vehicle Number:<br>
@@ -183,17 +209,16 @@
                     Vehicle CC(Displacement):<br>
                     <input type="text" id="vcc" name="vcc"><br><br>
  
-                    <input type="submit" class="btn btn-danger"  value="Add Vehicle">
+                    <button type="submit">Add Vehicle</button>
 
                     </form>
 
-                    </center>
   
 </div>
-
-  <a href="#">Show Vehicles</a>
-  <a href="#">Log out</a>
   
 </div>
+    
+</div>
+    
 </body>
 </html>

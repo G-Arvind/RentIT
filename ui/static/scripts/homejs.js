@@ -56,8 +56,8 @@ function login(){
             
                      		sessionStorage.setItem('username',email);
                      		sessionStorage.setItem('password',pass);
-                         sessionStorage.setItem('uid',uid);
-                     		window.location="admin.php";
+                        sessionStorage.setItem('uid',uid);
+                     		window.location="adminui.php";
 
                      	}
                      	else{

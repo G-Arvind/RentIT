@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use App\DAO\LoginDAO;
+use App\Delegate\LoginDelegate;
 //use App\Model\UserModel;
 
 class LoginController{
 
-  public $loginDAO;
+  public $loginDelegate;
 
 	function __construct(){
-         $this->loginDAO=new LoginDAO();
+         $this->loginDelegate=new LoginDelegate();
 	}
 
    function loginUser($request){
@@ -19,7 +19,7 @@ class LoginController{
     $email = $data['username'];
     $pass = $data['password'];
  
-    $responseArray=$this->loginDAO->validateLogin($email,$pass);
+    $responseArray=$this->loginDelegate->validateLogin($email,$pass);
 
     return $responseArray;
 

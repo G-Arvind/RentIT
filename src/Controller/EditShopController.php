@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\DAO\EditShopDAO;
+use App\Delegate\EditShopDelegate;
 use App\Model\ShopModel;
+use App\Model\AddressModel;
 
 class EditShopController{
 
-    public $shopmodel,$editshop;
+    public $shopmodel,$addressmodel,$editshop;
 
     function __construct(){
 
         $this->shopmodel=new ShopModel();
-        $this->editshop=new EditShopDAO();
+        $this->addressmodel=new AddressModel();
+        $this->editshop=new EditShopDelegate();
 
     }
 
@@ -21,7 +23,8 @@ class EditShopController{
 	$data=$request->getParsedBody();
 
    // var_dump($data);
-    //$uid=$data['uid'];
+    $uid=$data['uid'];
+
     $rname = $data['rname'];
 
     $remail = $data['remail'];
@@ -42,7 +45,7 @@ class EditShopController{
     
    // $shopmodel=new ShopModel();
     
-  //  $this->shopmodel->setShopUId($uid);
+    $this->shopmodel->setShopUId($uid);
 
     $this->shopmodel->setShopName($rname);
 
@@ -52,20 +55,20 @@ class EditShopController{
 
     $this->shopmodel->setShopPhno($rphno);
 
-    $this->shopmodel->setShopNo($rno);
+    $this->addressmodel->setShopNo($rno);
 
-    $this->shopmodel->setShopStreet($rstreet);
+    $this->addressmodel->setShopStreet($rstreet);
 
-    $this->shopmodel->setShopArea($rarea);
+    $this->addressmodel->setShopArea($rarea);
 
-    $this->shopmodel->setShopCity($rcity);
+    $this->addressmodel->setShopCity($rcity);
 
-    $this->shopmodel->setShopPin($rpin);
+    $this->addressmodel->setShopPin($rpin);
 
 
   //  $shop=new ShopDAO();
 
-    $responseArray=$this->editshop->editRetail($this->shopmodel,$rid,$aid);
+    $responseArray=$this->editshop->editRetail($this->shopmodel,$this->addressmodel,$rid,$aid);
 	
 	return $responseArray;
 

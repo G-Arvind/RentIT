@@ -1,34 +1,29 @@
 <?php
-namespace App\Util;
+namespace App\Dao;
 
 use App\Util\Connect;
 use App\Util\SqlOp;
 
-
-class ShopUtil{
+class ShopDao{
 
     private $rno,$rstreet,$rarea,$rcity,$rpin;
 
     private $rname,$remail,$rdesc,$rphno,$last_id,$uid;
 
-    public function addAddress($shopmodel){
+    public function addAddress($addressmodel){
 
-        $this->rno=$shopmodel->getShopNo();
-        $this->rstreet=$shopmodel->getShopStreet();
-        $this->rarea=$shopmodel->getShopArea();
-        $this->rcity=$shopmodel->getShopCity();
-        $this->rpin=$shopmodel->getShopPin();
-
-        // $addressAttribute = array($shopmodel::RETAIL_NUM,$shopmodel::RETAIL_STREET, $shopmodel::RETAIL_AREA,$shopmodel::RETAIL_CITY,$shopmodel::RETAIL_ZIP);
+        $this->rno=$addressmodel->getShopNo();
+        $this->rstreet=$addressmodel->getShopStreet();
+        $this->rarea=$addressmodel->getShopArea();
+        $this->rcity=$addressmodel->getShopCity();
+        $this->rpin=$addressmodel->getShopPin();
 
         $addressVAlues=array($this->rno,$this->rstreet,$this->rarea,$this->rcity,$this->rpin);
 
-
         $sql=new SqlOp();
-        return $sql->insert("address",$shopmodel::ADDRESS_ATTRIBUTES,$addressVAlues);
+        return $sql->insert("address",$addressmodel->getAddressAttributes(),$addressVAlues);
 
     }
-
 
     public function addShop($shopmodel,$last_id){
 
@@ -38,22 +33,20 @@ class ShopUtil{
         $this->rdesc=$shopmodel->getShopDescripion();
         $this->rphno=$shopmodel->getShopPhno();
 
-        // $shopAttribute=array($shopmodel::RETAIL_NAME,$shopmodel::RETAIL_EMAIL,$shopmodel::RETAIL_PHONE,$shopmodel::RETAIL_DESCRIPTION,$shopmodel::UID,$shopmodel::AID);
-
         $shopValues=array($this->rname,$this->remail,$this->rphno,$this->rdesc,$this->uid,$last_id);
 
         $sql=new SqlOp();
-        return $sql->insert("retail",$shopmodel::SHOP_ATTRIBUTES,$shopValues);
+        return $sql->insert("retail",$shopmodel->getShopAttributes(),$shopValues);
 
-    
 }
-public function editAddress($shopmodel,$aid){
 
-        $this->rno=$shopmodel->getShopNo();
-        $this->rstreet=$shopmodel->getShopStreet();
-        $this->rarea=$shopmodel->getShopArea();
-        $this->rcity=$shopmodel->getShopCity();
-        $this->rpin=$shopmodel->getShopPin();
+    public function editAddress($addressmodel,$aid){
+
+        $this->rno=$addressmodel->getShopNo();
+        $this->rstreet=$addressmodel->getShopStreet();
+        $this->rarea=$addressmodel->getShopArea();
+        $this->rcity=$addressmodel->getShopCity();
+        $this->rpin=$addressmodel->getShopPin();
 
             $db=new Connect();
             $this->conn=$db->getCon(); 
@@ -61,23 +54,22 @@ public function editAddress($shopmodel,$aid){
             $query="UPDATE address SET rno=\"".$this->rno."\",rstreet=\"".$this->rstreet."\", rarea=\"".$this->rarea."\",rcity=\"".$this->rcity."\", rzip=\"".$this->rpin."\" WHERE aid=".$aid.";";
 
 
-             $result=$this->conn->query($query);
+            $result=$this->conn->query($query);
  
-             if($result){
-
+            if($result){
                       return(array("response"=>1,"message"=>"success"));
-                 }
+            }
 
-                 else{
-         return(array("response"=>0,"message"=>"error :".$conn->error));
-     }    
+            else{
+                 return(array("response"=>0,"message"=>"error :".$conn->error));
+            }    
 
     }
 
 
     public function editShop($shopmodel,$rid){
 
-       // $this->uid=$shopmodel->getShopUId();
+        // $this->uid=$shopmodel->getShopUId();
         $this->rname=$shopmodel->getShopName();
         $this->remail=$shopmodel->getShopEmail();
         $this->rdesc=$shopmodel->getShopDescripion();
@@ -94,10 +86,7 @@ public function editAddress($shopmodel,$aid){
 
    $query="UPDATE retail SET rname=\"".$this->rname."\", remail=\"".$this->remail."\", rphno=\"".$this->rphno."\", description=\"".$this->rdesc."\" WHERE rid=".$rid.";";
 
-
    $result=$this->conn->query($query);
-
-
 
              if($result){
 
@@ -105,7 +94,7 @@ public function editAddress($shopmodel,$aid){
                  }
                  else{
          return(array("response"=>0,"message"=>"error :".$conn->error));
-     }    
+    }    
 }
 
 

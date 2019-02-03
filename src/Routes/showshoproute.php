@@ -8,13 +8,14 @@ use App\Controller\ShowShopController;
 
 $app->get('/admin/{uid}/shops', function (Request $request, Response $response, array $args) {
 
-	//$uid=$args['uid'];
-
+	$uid=$args['uid'];
+	
 	$showshopController=new ShowShopController();
 
     $responseArray=$showshopController->showShop($request,$args);
     
     $response=$response->withJson($responseArray);
+    
     return $response;
 
   

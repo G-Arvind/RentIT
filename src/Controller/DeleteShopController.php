@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use App\DAO\DeleteShopDAO;
+use App\Delegate\DeleteShopDelegate;
 //use App\Model\UserModel;
 
 class DeleteShopController{
 
-  public $deleteShopDAO;
+  public $deleteShopDelegate;
 
   function __construct(){
-         $this->deleteShopDAO=new DeleteShopDAO();
+         $this->deleteShopDelegate=new DeleteShopDelegate();
   }
 
    function deleteShop($request,$args){
@@ -18,7 +18,7 @@ class DeleteShopController{
     $rid = $args['shopid'];
     $aid = $args['addressid'];
  
-    $responseArray=$this->deleteShopDAO->deleteRetail($rid,$aid);
+    $responseArray=$this->deleteShopDelegate->deleteRetail($rid,$aid);
 
     return $responseArray;
    }

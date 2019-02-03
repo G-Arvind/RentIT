@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-use App\DAO\SignupDAO;
+use App\Delegate\SignupDelegate;
 use App\Model\UserModel;
 
 class SignupController{
@@ -13,7 +13,7 @@ class SignupController{
   function __construct(){
 
     $this->user=new UserModel();
-    $this->signupDAO=new SignupDAO();
+    $this->signupDelegate=new SignupDelegate();
 
   }
 
@@ -46,7 +46,7 @@ class SignupController{
 
    // $resp=$userDAO->addUser($email,$hashed_password,$fname,$phno,$type);
 
-    $responseArray=$this->signupDAO->addUser($this->user);
+    $responseArray=$this->signupDelegate->addUser($this->user);
 
     return $responseArray;
 

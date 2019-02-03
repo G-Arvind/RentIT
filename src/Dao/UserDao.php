@@ -1,9 +1,9 @@
 <?php
-namespace App\Util;
+namespace App\Dao;
 
 use App\Util\SqlOp;
 
-class UserUtil{
+class UserDao{
 
     private $email,$pass,$fname,$phno,$type;
  
@@ -25,11 +25,12 @@ class UserUtil{
         // $sql="INSERT INTO users (uname,uemail,upass,uphno,type) VALUES ('$fname','$email','$hashed_password','$phno','$type');";
 
         $sqlop=new SqlOp();
-        return $sqlop->insert("users",$user::ATTRIBUTES,$userValues);
+        return $sqlop->insert("users",$user->getAttributes(),$userValues);
 
     }
     public function login($email,$password){
 
+       
 
         $sqlop=new SqlOp();
 
@@ -37,12 +38,11 @@ class UserUtil{
             $result=$sqlop->select($object);
             
           if(count($result)==1 &&  password_verify($password,$result[0]['upass'])){
-            
 
 
                 $type=$result[0]['type'];
             
-                 $uid=$result[0]['uid'];
+                $uid=$result[0]['uid'];
       
 
 

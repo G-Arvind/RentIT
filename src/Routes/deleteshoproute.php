@@ -13,6 +13,7 @@ $app->delete('/deleteShop/{shopid}/{addressid}', function (Request $request, Res
     $responseArray=$deleteShopController->deleteShop($request,$args);
     
     $response=$response->withJson($responseArray);
+    
     return $response;
 
   

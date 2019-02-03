@@ -11,8 +11,9 @@ $app->post('/login', function (Request $request, Response $response, array $args
 	$loginController=new LoginController();
 
     $responseArray=$loginController->loginUser($request);
-    
+
     $response=$response->withJson($responseArray);
+  
     return $response;
 
   

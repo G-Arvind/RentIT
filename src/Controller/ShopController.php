@@ -2,17 +2,21 @@
 
 namespace App\Controller;
 
-use App\DAO\ShopDAO;
+use App\Delegate\ShopDelegate;
 use App\Model\ShopModel;
+use App\Model\AddressModel;
 
 class ShopController{
 
-    public $shopmodel,$shop;
+    public $shopmodel,$addressmodel,$shop;
 
     function __construct(){
 
+         session_start();
+
         $this->shopmodel=new ShopModel();
-        $this->shop=new ShopDAO();
+        $this->addressmodel=new AddressModel();
+        $this->shop=new ShopDelegate();
 
     }
 
@@ -20,10 +24,11 @@ class ShopController{
 	{
 	  $data=$request->getParsedBody();
 
-      var_dump($data);
+      //var_dump($data);
 
 
     $uid=$data['uid'];
+
     $rname = $data['rname'];
     $remail = $data['remail'];
     $rdesc=$data['rdesc'];
@@ -48,19 +53,19 @@ class ShopController{
 
     $this->shopmodel->setShopPhno($rphno);
 
-    $this->shopmodel->setShopNo($rno);
+    $this->addressmodel->setShopNo($rno);
 
-    $this->shopmodel->setShopStreet($rstreet);
+    $this->addressmodel->setShopStreet($rstreet);
 
-    $this->shopmodel->setShopArea($rarea);
+    $this->addressmodel->setShopArea($rarea);
 
-    $this->shopmodel->setShopCity($rcity);
+    $this->addressmodel->setShopCity($rcity);
 
-    $this->shopmodel->setShopPin($rpin);
+    $this->addressmodel->setShopPin($rpin);
 
 
   //  $shop=new ShopDAO();
-    $responseArray=$this->shop->addNewShop($this->shopmodel);
+    $responseArray=$this->shop->addNewShop($this->shopmodel,$this->addressmodel);
 	
 	return $responseArray;
 

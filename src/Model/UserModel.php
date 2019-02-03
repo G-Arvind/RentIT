@@ -3,7 +3,11 @@ namespace App\Model;
 
 class UserModel{
 
-	const ATTRIBUTES=array("uname","uemail","upass","uphno","type");
+	private const ATTRIBUTES=array("uname","uemail","upass","uphno","type");
+
+ 	public function getAttributes(){
+ 		return $this::ATTRIBUTES;
+ 	}
 
 	private $email,$pass,$fname,$phno,$type;
 	

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\DAO\ShowshopDAO;
+use App\Delegate\ShowshopDelegate;
 //use App\Model\UserModel;
 
 class ShowShopController{
@@ -10,7 +10,9 @@ class ShowShopController{
   public $showshopdao;
 
 	function __construct(){
-         $this->showshopdao=new ShowshopDAO();
+
+         //session_start();
+         $this->showshopDelegate=new ShowshopDelegate();
 	}
 
    function showShop($request,$args){
@@ -20,8 +22,9 @@ class ShowShopController{
     // $pass = $data['password'];
 
     $uid=$args['uid'];
+
  
-    $responseArray=$this->showshopdao->listshops($uid);
+    $responseArray=$this->showshopDelegate->listshops($uid);
 
     return $responseArray;
 
